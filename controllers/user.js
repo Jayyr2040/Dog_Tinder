@@ -3,6 +3,23 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
+// multer local server test
+const multer = require("multer");
+const path = require("path");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./Images");
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+});
+
 // INDEX
 router.get("/", (req, res) => {
   User.find({}, (err, foundUsers) => {
@@ -73,7 +90,7 @@ router.get("/new", (req, res) => {
 });
 
 // CREATE
-router.post("/", (req, res) => {
+router.post("/", upload.single("image"), (req, res) => {
   req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync(10)
