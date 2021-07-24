@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     enum: {
-      values: ["N", "S", "E", "W", "C"],
+      values: ["North", "South", "East", "West", "Central"],
       message: "{VALUE} is not a region",
     },
   },
