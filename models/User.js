@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
   type: {
     type: String,
     required: true,
+    default: "user",
     enum: {
       values: ["user", "admin"],
       message: "{VALUE} is not recognised",
