@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
       values: ["user", "admin"],
       message: "{VALUE} is not recognised",
     },
+    default: "user",
   },
   fullName: { type: String, required: true },
   image: String,
@@ -23,7 +24,7 @@ const userSchema = mongoose.Schema({
     },
   },
   description: String,
-  dog: String
+  dog: String,
 });
 
 module.exports = mongoose.model("User", userSchema);
