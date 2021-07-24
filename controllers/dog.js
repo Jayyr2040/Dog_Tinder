@@ -44,6 +44,11 @@ router.get("/seed", (req, res) => {
   });
 });
 
+// NEW USER INDEX
+router.get("/new", (req, res)=> {
+  res.render("../views/dog.ejs")
+ });
+
 // CREATE
 router.post("/", (req, res) => {
   Dog.create(req.body, (error, createdDog) => {
@@ -52,6 +57,7 @@ router.post("/", (req, res) => {
     }
     res.status(200).send(createdDog);
   });
+  res.redirect('/dogs');
 });
 
 // DELETE

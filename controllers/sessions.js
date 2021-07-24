@@ -3,13 +3,14 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User.js");
 
+
 // ROUTES
 // get new user index
 router.get("/new", (req, res) => {
-    res.render("../views/session/new.ejs");
+    res.render("../views/login.ejs");
    });
 
-router.post("/new", (req, res) => {
+router.post("/", (req, res) => {
     User.findOne({username: req.body.username},(err,foundUser) => {
         if (err) {
             console.log(err);
@@ -19,7 +20,7 @@ router.post("/new", (req, res) => {
           } else if (bcrypt.compareSync(req.body.password, foundUser.password)) {
             req.session.currentUser = foundUser;
             console.log("log in user", req.session.currentUser);
-            res.redirect("/");
+            res.redirect("/users");
             } else {
                 res.send('<a href="/"> password does not match </a>');
               }
@@ -28,6 +29,7 @@ router.post("/new", (req, res) => {
 
    // logout
    router.delete("/", (req, res) => {
+    console.log("log out user", req.session.currentUser);
     req.session.destroy(() => {
       res.redirect("/");
     });

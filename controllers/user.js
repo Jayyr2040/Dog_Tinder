@@ -70,21 +70,20 @@ router.get("/new", (req, res)=> {
  });
 
 // CREATE  
-router.post("/", (req, res) => {
-  /*  
+router.post("/new", (req, res) => {
+  
    req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync(10)
-  ); */
+  ); 
 
-console.log("password",req.body);
   User.create(req.body, (error, createdUser) => {
     if (error) {
       res.status(400).json({ error: error.message });
     }
     res.status(200).send(createdUser);
   });
-  res.redirect("/users");
+  res.redirect('/users');
 });
 
 // DELETE

@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const MONGODB_URI = process.env.MONGODB_URI;
 const session = require("express-session");
+const methodOverride = require('method-override');
 
 // Mongoose connection
 mongoose.connection.on("error", (err) =>
@@ -26,6 +27,7 @@ mongoose.connection.once("open", () => {
 // Middleware
 app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
+app.use(methodOverride("_method"));
 app.use(
   session({
     secret: process.env.SECRET, 
@@ -33,6 +35,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 
 // Controllers
 const usersController = require("./controllers/user");
