@@ -13,6 +13,26 @@ router.get("/", (req, res) => {
     });
   });
 
+// SEED
+router.get("/seed", (req, res) => {
+  LikeEvent.remove({}, (error, events) => {
+    LikeEvent.create([{
+      "liker": "111",
+      "likee": "222",
+    },
+    {
+      "liker": "333",
+      "likee": "444",
+    },
+    {
+      "liker": "555",
+      "likee": "666",
+    },
+    ], (err, data) => {
+      res.redirect("/likeevents");
+    });
+  });
+});
 
 // CREATE
 router.post("/", (req, res) => {
@@ -34,25 +54,6 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-// SEED
-router.get("/seed", (req, res) => {
-  LikeEvent.remove({}, (error, events) => {
-    LikeEvent.create([{
-      "liker": "111",
-      "likee": "222",
-    },
-    {
-      "liker": "333",
-      "likee": "444",
-    },
-    {
-      "liker": "555",
-      "likee": "666",
-    },
-    ], (err, data) => {
-      res.redirect("/likeevents");
-    });
-  });
-});
+
 
 module.exports = router

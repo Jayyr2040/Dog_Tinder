@@ -4,6 +4,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const MONGODB_URI = process.env.MONGODB_URI;
+const session = require("express-session");
+const methodOverride = require('method-override');
 
 // Mongoose connection
 mongoose.connection.on("error", (err) =>
@@ -23,15 +25,27 @@ mongoose.connection.once("open", () => {
 });
 
 // Middleware
+app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
+app.use(methodOverride("_method"));
+app.use(
+  session({
+    secret: process.env.SECRET, 
+    resave: false, 
+    saveUninitialized: false,
+  })
+);
+
 
 // Controllers
 const usersController = require("./controllers/user");
 const dogsController = require("./controllers/dog");
-const likeEventsController = require("./controllers/likeEvent")
-app.use("/users", usersController)
-app.use("/dogs", dogsController)
-app.use("/likeevents", likeEventsController)
+const likeEventsController = require("./controllers/likeEvent");
+const sessionsController = require("./controllers/sessions.js");
+app.use("/users", usersController);
+app.use("/dogs", dogsController);
+app.use("/likeevents", likeEventsController);
+app.use("/sessions", sessionsController)
 
 app.listen(PORT, () => {
   console.log("Matching happening on port", PORT);
