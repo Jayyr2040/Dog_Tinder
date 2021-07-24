@@ -11,8 +11,7 @@ const userSchema = mongoose.Schema({
       message: "{VALUE} is not recognised",
     },
   },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  fullName: { type: String, required: true },
   image: String,
   email: { type: String, required: true },
   location: {
