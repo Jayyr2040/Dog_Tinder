@@ -22,10 +22,6 @@ router.post("/", (req, res) => {
   });
 });
 
-
-// ========================== //
-// ========================== //
-
 // DELETE
 router.delete("/:id", (req, res) => {
   Dog.findByIdAndRemove(req.params.id, (err, deletedDog) => {
@@ -62,11 +58,7 @@ router.get("/:name", (req, res) => {
       } )
 });
 
-// ========================== //
-// ========================== //
-
-
-
+// SEED
 router.get("/seed", (req, res) => {
   Dog.remove({}, (error, dogs) => {
     Dog.create([{

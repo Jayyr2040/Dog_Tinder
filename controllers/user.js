@@ -22,10 +22,6 @@ router.post("/", (req, res) => {
   });
 });
 
-
-// ========================== //
-// ========================== //
-
 // DELETE
 router.delete("/:id", (req, res) => {
   User.findByIdAndRemove(req.params.id, (err, deletedUser) => {
@@ -52,10 +48,18 @@ router.put("/:id", (req, res) => {
   );
 });
 
-// ========================== //
-// ========================== //
+// SHOW
+router.get("/:username", (req, res) => {
+  User.find( 
+    { username: req.params.username },
 
-  
+     (error, foundUser) => {
+        console.log(foundUser );
+        res.send( foundUser );
+      } )
+});
+
+// SEED
 router.get("/seed", (req, res) => {
   User.remove({}, (error, users) => {
     User.create([{
