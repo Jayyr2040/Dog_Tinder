@@ -10,15 +10,15 @@
 
 <body>
     <section class="multi_step_form">
-        <form action="/users" method="POST">
+        <form action="/users" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <div class="userprofile1">
                     <input type="text" name="fullName" placeholder="Full Name" id="fullName"/>
                     <input type="text" name="username" placeholder="Username" id="username" />
                     <input type="text" name="password" placeholder="Password" id="password"/>
                     <input type="text" name="email" placeholder="email" id="email" />
-                    <input type="text" name="type" placeholder="user" id="type"/>
                     <input type="text" name="location" placeholder="N" id="location" />
+                    <input type="file" name="image">
                     <input type="submit" value="Continue" />
                 </div>
             </fieldset>
