@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const User = require("../models/User")
 
+// INDEX
 router.get("/", (req, res) => {
     User.find({}, (err, foundUsers) => {
       if (err) {
@@ -11,14 +12,48 @@ router.get("/", (req, res) => {
     });
   });
 
-  router.post("/", (req, res) => {
-    User.create(req.body, (error, createdUser) => {
-      if (error) {
-        res.status(400).json({ error: error.message });
-      }
-      res.status(200).send(createdUser);
-    });
+// CREATE  
+router.post("/", (req, res) => {
+  User.create(req.body, (error, createdUser) => {
+    if (error) {
+      res.status(400).json({ error: error.message });
+    }
+    res.status(200).send(createdUser);
   });
+});
+
+
+// ========================== //
+// ========================== //
+
+// DELETE
+router.delete("/:id", (req, res) => {
+  User.findByIdAndRemove(req.params.id, (err, deletedUser) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(deletedUser);
+  });
+});
+
+
+// UPDATE
+router.put("/:id", (req, res) => {
+  User.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+      }
+      res.status(200).json(updatedUser);
+    }
+  );
+});
+
+// ========================== //
+// ========================== //
 
   
 router.get("/seed", (req, res) => {
@@ -55,9 +90,20 @@ router.get("/seed", (req, res) => {
       "type": "user",
       "description": "where is a good place for dog",
       "dog": "60fac0f512cc4a0015da2b50",
+    },
+    {
+      "username": "edddd",
+      "password": "12345",
+      "email": "email@email.com",
+      "firstName": "Ed",
+      "lastName": "What",
+      "location": "C",
+      "type": "user",
+      "description": "i have a big dog",
+      "dog": "60fb58eb8d362a04eebc6526",
     }
     ], (err, data) => {
-      res.redirect("/");
+      res.redirect("/users");
     });
   });
 });
