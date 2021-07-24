@@ -70,7 +70,7 @@ router.get("/new", (req, res)=> {
  });
 
 // CREATE  
-router.post("/new", (req, res) => {
+router.post("/", (req, res) => {
   
    req.body.password = bcrypt.hashSync(
     req.body.password,
@@ -83,7 +83,7 @@ router.post("/new", (req, res) => {
     }
     res.status(200).send(createdUser);
   });
-  res.redirect('/users');
+// res.redirect('/users');
 });
 
 // DELETE

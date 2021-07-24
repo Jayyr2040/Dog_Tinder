@@ -57,7 +57,7 @@ router.post("/", (req, res) => {
     }
     res.status(200).send(createdDog);
   });
-  res.redirect('/dogs');
+ // res.redirect('/dogs');
 });
 
 // DELETE
