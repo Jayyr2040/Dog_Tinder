@@ -90,19 +90,18 @@ router.get("/new", (req, res) => {
 });
 
 // CREATE
-router.post("/", upload.single("image"), (req, res) => {
+router.post("/", (req, res) => {
+  console.log(req.body);
   req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync(10)
   );
-
   User.create(req.body, (error, createdUser) => {
     if (error) {
       res.status(400).json({ error: error.message });
     }
     res.status(200).send(createdUser);
   });
-  // res.redirect('/users');
 });
 
 // DELETE
@@ -131,15 +130,11 @@ router.put("/:id", (req, res) => {
 });
 
 // SHOW
-router.get("/:username", (req, res) => {
-  User.find(
-    { username: req.params.username },
-
-    (error, foundUser) => {
-      console.log(foundUser);
-      res.send(foundUser);
-    }
-  );
+router.get("/:id", (req, res) => {
+  User.find({ username: req.params.username }, (error, foundUser) => {
+    console.log(foundUser);
+    res.send(foundUser);
+  });
 });
 
 module.exports = router;

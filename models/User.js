@@ -18,14 +18,12 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   location: {
     type: String,
-    required: true,
     enum: {
       values: ["North", "South", "East", "West", "Central"],
       message: "{VALUE} is not a region",
     },
   },
   description: String,
-  dog: String,
 });
 
 module.exports = mongoose.model("User", userSchema);
