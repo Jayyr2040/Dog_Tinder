@@ -32,7 +32,6 @@ router.get("/", (req, res) => {
 
 // SEED
 router.get("/seed", (req, res) => {
-  console.log("shit");
   User.remove({}, (error, users) => {
     User.create(
       [
@@ -100,7 +99,7 @@ router.post("/", upload.single("image"), (req, res) => {
     if (error) {
       res.status(400).json({ error: error.message });
     }
-    res.status(200).send(createdUser);
+    res.status(200).send(createdUser).redirect('/users');
   });
   // res.redirect('/users');
 });
@@ -131,9 +130,9 @@ router.put("/:id", (req, res) => {
 });
 
 // SHOW
-router.get("/:username", (req, res) => {
+router.get("/:id", (req, res) => {
   User.find(
-    { username: req.params.username },
+    { _id : req.params.id },
 
     (error, foundUser) => {
       console.log(foundUser);

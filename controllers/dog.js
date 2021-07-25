@@ -86,9 +86,9 @@ router.put("/:id", (req, res) => {
 });
 
 // SHOW
-router.get("/:name", (req, res) => {
+router.get("/:id", (req, res) => {
   Dog.find( 
-    { name: req.params.name },
+    { _id: req.params.id },
 
      (error, foundDogs) => {
         console.log(foundDogs );
