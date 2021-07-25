@@ -13,7 +13,8 @@ const dogSchema = mongoose.Schema({
   },
   yob: Number,
   breed: String,
-  description: {type: String, maxLength: 280},
+  description: { type: String, maxLength: 280 },
+  owner: String,
 });
 
 module.exports = mongoose.model("Dog", dogSchema);

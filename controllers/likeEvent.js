@@ -1,36 +1,14 @@
-const express = require("express")
-const router = express.Router()
-const LikeEvent = require("../models/LikeEvent")
-
+const express = require("express");
+const router = express.Router();
+const LikeEvent = require("../models/LikeEvent");
 
 // INDEX
 router.get("/", (req, res) => {
-    LikeEvent.find({}, (err, foundLikeEvents) => {
-      if (err) {
-        res.status(400).json({ error: err.message });
-      }
-      res.status(200).json(foundLikeEvents);
-    });
-  });
-
-// SEED
-router.get("/seed", (req, res) => {
-  LikeEvent.remove({}, (error, events) => {
-    LikeEvent.create([{
-      "liker": "111",
-      "likee": "222",
-    },
-    {
-      "liker": "333",
-      "likee": "444",
-    },
-    {
-      "liker": "555",
-      "likee": "666",
-    },
-    ], (err, data) => {
-      res.redirect("/likeevents");
-    });
+  LikeEvent.find({}, (err, foundLikeEvents) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+    }
+    res.status(200).json(foundLikeEvents);
   });
 });
 
@@ -54,6 +32,4 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-
-
-module.exports = router
+module.exports = router;
